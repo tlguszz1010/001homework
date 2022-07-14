@@ -80,7 +80,7 @@ class SignUpViewController: UIViewController {
     @IBAction func signUpButtonClicked(_ sender: UIButton) {
         
         // 이메일과 비밀번호는 필수로 기입
-        if signTextField1.text == "" || signTextField2.text == "" {
+        if signTextField1.text?.isEmpty == true || signTextField2.text?.isEmpty == true {
             print("다시 입력해주세요 !")
         }
         // 비밀번호는 최소 6자리 이상
