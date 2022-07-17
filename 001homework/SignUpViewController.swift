@@ -27,7 +27,7 @@ class SignUpViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
+        signUpButton.isUserInteractionEnabled = false
         view.backgroundColor = UIColor.black
         
         titleLabel.textAlignment = .center
@@ -77,15 +77,23 @@ class SignUpViewController: UIViewController {
         signSwitch.onTintColor = UIColor.systemPink
     }
     
-    @IBAction func signUpButtonClicked(_ sender: UIButton) {
-        
+    @IBAction func signUpButtonClicked(_ sender: UIButton) { // 회원가입 버튼을 눌렀을 때
+        var flag = 0
         // 이메일과 비밀번호는 필수로 기입
-        if signTextField1.text?.isEmpty == true || signTextField2.text?.isEmpty == true {
+        if signTextField1.text!.isEmpty || signTextField2.text!.isEmpty {
             print("다시 입력해주세요 !")
+            flag = 1
+        }
+        else {
+            flag = 0
         }
         // 비밀번호는 최소 6자리 이상
         if signTextField2.text!.count < 6 {
             print("다시 입력해주세요 !")
+            flag = 1
+        }
+        else {
+            flag = 0
         }
         // 추천코드는 숫자만 입력
 //        for i in signTextField5.text! {
@@ -97,9 +105,19 @@ class SignUpViewController: UIViewController {
         if let textField5 = signTextField5.text { // textField5에 signTextField5.text가 성공적으로 할당된다면, {} 중괄호 안의 코드를 실행한다.
             if Int(textField5) == nil { // Int로 형변환 했는데 nil이라면 숫자가 아니기 때문에 숫자 입력 알려주기!
                 print("숫자를 입력하세요")
+                flag = 1
+            }
+            else {
+                flag = 0
             }
         }
         
+        if flag == 1 {
+            signUpButton.isUserInteractionEnabled = true
+        }
+        else {
+            signUpButton.isUserInteractionEnabled = false
+        }
         view.endEditing(true)
     }
     
